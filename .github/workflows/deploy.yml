@@ -36,7 +36,11 @@ jobs:
       # answers for it.
       - run: cp dist/portfolio/browser/index.html dist/portfolio/browser/404.html
 
+      # enablement turns Pages on for the repo if it is not configured yet,
+      # so a fresh clone deploys without a manual visit to Settings.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
