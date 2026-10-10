@@ -1,0 +1,79 @@
+<div class="animation-inner">
+  <h2 class="animation-title">{{ t().animationTitle }}</h2>
+  <span class="animation-underline"></span>
+
+  <div class="animation-showcase">
+    <figure class="animation-media">
+      <video
+        #featuredEl
+        class="animation-reel"
+        [src]="featured()"
+        [attr.aria-label]="t().animationTitle"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+      ></video>
+
+      @if (playbackBlocked()) {
+        <button
+          type="button"
+          class="animation-resume"
+          [attr.aria-label]="t().animation.play"
+          (click)="resumePlayback()"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M10 8.2l6.2 3.8-6.2 3.8z" />
+          </svg>
+        </button>
+      }
+    </figure>
+
+    <div class="animation-copy">
+      <p class="animation-copy-text">{{ t().animationCopy }}</p>
+
+      <button type="button" class="animation-open" (click)="openGallery()">
+        <span class="animation-open-label">{{ t().animation.openGallery }}</span>
+        <span class="animation-open-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M4 12h16M14 6l6 6-6 6" />
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+@if (galleryOpen()) {
+  <div
+    class="reel-backdrop"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="t().animationTitle"
+    (click)="onBackdropClick($event)"
+  >
+    <div class="reel-shell">
+      <header class="reel-header">
+        <h3 class="reel-heading">{{ t().animationTitle }}</h3>
+        <button
+          type="button"
+          class="reel-close"
+          [attr.aria-label]="t().gallery.close"
+          (click)="closeGallery()"
+        >
+          &times;
+        </button>
+      </header>
+
+      <swiper-container #gallerySwiper class="reel-swiper" init="false">
+        @for (reel of reels(); track reel) {
+          <swiper-slide class="reel-slide">
+            <app-video-player class="reel-player" [src]="reel" />
+          </swiper-slide>
+        }
+      </swiper-container>
+    </div>
+  </div>
+}

@@ -1,0 +1,281 @@
+:host {
+  position: relative;
+  z-index: 1;
+  scroll-margin-top: var(--header-height);
+  width: 100%;
+  min-height: 70svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 80px 0;
+}
+
+/* Raises the section above the fixed header's stacking context so the
+   fullscreen reel overlay covers it, matching the photo gallery. */
+:host.reel-open {
+  z-index: 1000;
+}
+
+.animation-inner {
+  width: 100%;
+  max-width: 1400px;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.animation-title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: 0.12em;
+  cursor: default;
+}
+
+.animation-underline {
+  display: block;
+  width: 48px;
+  height: 4px;
+  margin-top: -12px;
+  border-radius: 2px;
+  background-color: #0a7758;
+}
+
+/* Reel on the left, copy on the right and vertically centred against it. */
+.animation-showcase {
+  flex: 0 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 48px;
+  margin-top: 24px;
+}
+
+.animation-media {
+  position: relative;
+  transform: translateZ(0);
+  flex: 0 0 55%;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid #d2d2d2;
+  border-radius: 8px;
+  background-color: #272727;
+}
+
+.animation-reel {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: #272727;
+}
+
+.animation-copy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.animation-copy-text {
+  margin: 0;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 165%;
+  max-width: 700px;
+  text-align: center;
+  white-space: pre-line;
+  color: #3a3a3a;
+  cursor: default;
+}
+
+.animation-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 28px;
+  border: 1px solid #0a7758;
+  border-radius: 8px;
+  background: transparent;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.14em;
+  color: #0a7758;
+  cursor: pointer;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.animation-open:hover,
+.animation-open:focus-visible {
+  background-color: #0a7758;
+  color: #f9f9f9;
+}
+
+.animation-open-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.25s ease;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.animation-open:hover .animation-open-icon {
+  transform: translateX(4px);
+}
+
+.reel-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(6px);
+}
+
+.reel-shell {
+  width: 100%;
+  max-width: 1200px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.reel-header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.reel-heading {
+  margin: 0;
+  flex: 1;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.06em;
+  color: #f9f9f9;
+}
+
+.reel-close {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid rgba(249, 249, 249, 0.3);
+  border-radius: 50%;
+  background: transparent;
+  color: #f9f9f9;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.reel-close:hover {
+  background-color: rgba(249, 249, 249, 0.12);
+}
+
+.reel-swiper {
+  flex: 0 1 auto;
+  min-height: 0;
+  width: 100%;
+  --swiper-theme-color: #f9f9f9;
+  --swiper-navigation-size: 32px;
+}
+
+.reel-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* A 16:9 box capped by both the shell width and ~80% of the viewport height,
+   so the player never balloons past the video itself. */
+.reel-player {
+  width: min(100%, calc(80svh * 16 / 9));
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+/* Only rendered when the browser refused to autoplay. */
+.animation-resume {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  border: none;
+  background: transparent;
+  color: #f9f9f9;
+  cursor: pointer;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  :host {
+    padding: 40px 20px;
+  }
+
+  .animation-title {
+    height: auto;
+    font-size: 22px;
+  }
+
+  .animation-underline {
+    margin-top: 0;
+  }
+
+  .animation-showcase {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+    margin-top: 8px;
+  }
+
+  .animation-media {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .animation-copy {
+    gap: 20px;
+  }
+
+  .animation-copy-text {
+    font-size: 15px;
+  }
+
+  .reel-backdrop {
+    padding: 16px;
+  }
+}

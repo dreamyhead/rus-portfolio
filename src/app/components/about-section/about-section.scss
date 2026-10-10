@@ -1,0 +1,438 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.section-layout {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 24px;
+  height: 100svh;
+}
+
+.section-layout-container {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  gap: 32px;
+}
+
+.projects {
+  flex: 0 1 auto;
+}
+
+.projects,
+.projects .section-content {
+  min-height: 0;
+}
+
+.section-divider-horizontal {
+  flex: 0 0 2px;
+  width: 100%;
+  max-width: 1400px;
+  background-color: #d2d2d2;
+}
+
+.experience {
+  flex: 0 0 auto;
+  justify-content: space-between;
+}
+
+/* Sized by content, not stretched, so space-between has room to work. */
+.experience > .section-content {
+  flex: 0 0 auto;
+  width: auto;
+}
+
+/* Must outrank the rule above, hence the child selector. */
+.experience > .skills {
+  width: 550px;
+  min-width: 550px;
+  padding-right: 32px;
+  border-right: 2px solid #d2d2d2;
+}
+
+.experience > .about-copy {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  width: auto;
+}
+
+.section-content {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.about-me {
+  position: relative;
+  z-index: 1;
+  scroll-margin-top: var(--header-height);
+  width: 100%;
+  min-height: calc(100svh - var(--header-height));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2;
+  gap: 24px;
+  padding: 32px 0;
+}
+
+.section-title {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 60px;
+  margin: 0;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: 12%;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  cursor: default;
+}
+
+.section-title-underline {
+  display: block;
+  width: 48px;
+  height: 4px;
+  margin-top: -12px;
+  border-radius: 2px;
+  background-color: #0a7758;
+}
+
+/* Arrows sit beside the carousel, mirroring the projects carousel below. */
+.timeline-carousel {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.timeline-swiper {
+  width: 100%;
+  flex: 0 1 auto;
+  min-height: 0;
+}
+
+.timeline-slide {
+  height: auto;
+}
+
+.timeline-card {
+  width: 100%;
+  height: var(--timeline-card-height, auto);
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 16px;
+  padding: 28px;
+  border: 1px solid #d2d2d2;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.timeline-card-year {
+  font-size: 40px;
+  line-height: 100%;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  color: #0a7758;
+  cursor: default;
+}
+
+.timeline-card-text {
+  margin: 0;
+  font-size: 16px;
+  line-height: 155%;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  color: #3a3a3a;
+}
+
+.section-description {
+  max-width: 720px;
+  font-size: 16px;
+  line-height: 150%;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+}
+
+.projects-carousel {
+  flex: 0 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.projects-swiper {
+  width: 100%;
+  flex: 0 1 auto;
+  min-height: 0;
+}
+
+.carousel-controls {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.carousel-nav {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  padding: 11px;
+  border: 2px solid #0a7758;
+  border-radius: 50%;
+  background: transparent;
+  color: #0a7758;
+  cursor: pointer;
+}
+
+.carousel-nav:disabled,
+.carousel-nav.swiper-button-disabled {
+  opacity: 0.25;
+  cursor: default;
+  pointer-events: none;
+}
+
+.carousel-nav svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.project-slide {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.project-card {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid #d2d2d2;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.project-card-cover {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  flex: 0 1 auto;
+  aspect-ratio: 1 / 1;
+  min-height: 0;
+  overflow: hidden;
+  padding: 12px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #0a7758 0%, #272727 100%);
+}
+
+.project-card-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.project-card-year {
+  position: relative;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  color: #f9f9f9;
+}
+
+.project-card-category {
+  flex: 0 0 auto;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  color: #0a7758;
+}
+
+.project-card-title {
+  margin: 0;
+  flex: 0 0 auto;
+  height: calc(24px * 1.1);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
+  font-size: 24px;
+  line-height: 110%;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+}
+
+.project-card-description {
+  flex: 0 0 auto;
+  height: calc(14px * 1.45 * 2);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 145%;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+}
+
+.project-card-clickable {
+  cursor: pointer;
+}
+
+.skills-grid {
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.skill-card:last-child:nth-child(odd) {
+  grid-column: span 2;
+}
+
+.skill-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid #d2d2d2;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.skill-card-shown {
+  opacity: 1;
+  transform: none;
+}
+
+.skill-card-icon {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  color: #0a7758;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.skill-card-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.skill-card-name {
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-me {
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+    gap: 32px;
+    padding: 40px 20px;
+  }
+
+  .section-layout-container {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .experience > .section-content,
+  .experience > .skills {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .experience > .skills {
+    padding-right: 0;
+    border-right: none;
+  }
+
+  .section-title {
+    height: auto;
+    font-size: 22px;
+  }
+
+  .section-title-underline {
+    margin-top: 0;
+  }
+
+  .section-divider-horizontal {
+    display: none;
+  }
+
+  .section-description {
+    font-size: 14px;
+  }
+
+  .timeline-card {
+    min-height: 220px;
+    padding: 20px;
+  }
+
+  .timeline-card-year {
+    font-size: 30px;
+  }
+
+  .timeline-card-text {
+    font-size: 14px;
+  }
+
+  .projects-swiper {
+    max-height: none;
+  }
+}

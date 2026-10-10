@@ -1,0 +1,40 @@
+<div class="header-inner">
+  <a class="header-logo" href="#home">GR<span class="header-logo-dot">.</span></a>
+
+  <div class="header-right">
+    <nav id="header-nav" class="header-nav" [class.header-nav-open]="menuOpen()" aria-label="Main">
+      <a class="header-link" href="#home" (click)="closeMenu()">{{ t().nav.home }}</a>
+      <a class="header-link" href="#about" (click)="closeMenu()">{{ t().nav.about }}</a>
+      <a class="header-link" href="#animation" (click)="closeMenu()">{{ t().nav.animation }}</a>
+      <a class="header-link" href="#contact" (click)="closeMenu()">{{ t().nav.contact }}</a>
+    </nav>
+
+    <div class="header-lang" role="group" aria-label="Language">
+      @for (option of langs; track option) {
+        <button
+          type="button"
+          class="header-lang-option"
+          [class.header-lang-active]="lang() === option"
+          [attr.aria-pressed]="lang() === option"
+          (click)="setLang(option)"
+        >
+          {{ option.toUpperCase() }}
+        </button>
+      }
+    </div>
+
+    <button
+      type="button"
+      class="header-menu-toggle"
+      [class.header-menu-toggle-open]="menuOpen()"
+      [attr.aria-expanded]="menuOpen()"
+      aria-label="Menu"
+      aria-controls="header-nav"
+      (click)="toggleMenu()"
+    >
+      <span class="header-menu-bar"></span>
+      <span class="header-menu-bar"></span>
+      <span class="header-menu-bar"></span>
+    </button>
+  </div>
+</div>

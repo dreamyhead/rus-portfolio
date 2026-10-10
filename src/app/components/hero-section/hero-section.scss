@@ -1,0 +1,156 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.main-layout {
+  position: relative;
+  z-index: 1;
+  scroll-margin-top: var(--header-height);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: #f9f9f9;
+  height: 100svh;
+}
+
+.main-layout-container {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.main-layout-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.profile-picture-frame {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.profile-picture-frame::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  width: 500px;
+  aspect-ratio: 1 / 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background-color: #0a7758;
+  z-index: 0;
+}
+
+.profile-picture {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-height: 810px;
+  object-fit: contain;
+}
+
+.name {
+  font-size: 180px;
+  color: black;
+  text-align: left;
+  margin: 0;
+  line-height: 103%;
+  letter-spacing: 0%;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  margin-left: -10px;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+  cursor: default;
+}
+
+.main-layout-text {
+  align-self: stretch;
+}
+
+.main-layout-accent {
+  display: block;
+  width: 80px;
+  height: 4px;
+  /* 24px of column gap plus this: a wide break before the rule. */
+  margin-top: 44px;
+  margin-bottom: 64px;
+  background-color: #0a7758;
+}
+
+.main-layout-description {
+  max-width: 550px;
+  margin: auto 0 0;
+  font-size: 18px;
+  line-height: 160%;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  color: #4a4a4a;
+}
+
+.profession {
+  font-size: 32px;
+  color: #0a7758;
+  text-align: left;
+  margin: 0;
+  line-height: 100%;
+  letter-spacing: 0%;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  cursor: default;
+}
+
+@media (max-width: 768px) {
+  .main-layout {
+    height: auto;
+    min-height: 100svh;
+    align-items: stretch;
+    padding: calc(var(--header-height) + 24px) 20px 0;
+  }
+
+  .main-layout-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .main-layout-text {
+    align-self: auto;
+    justify-content: baseline;
+    gap: 12px;
+  }
+
+  .name {
+    font-size: 48px;
+    margin-left: 0;
+  }
+
+  .profession {
+    font-size: 14px;
+  }
+
+  /* Absent from the mobile design: the hero is name, role and portrait. */
+  .main-layout-description,
+  .main-layout-accent {
+    display: none;
+  }
+
+  .profile-picture-frame::before {
+    width: 210px;
+  }
+
+  .profile-picture {
+    max-height: 360px;
+  }
+}

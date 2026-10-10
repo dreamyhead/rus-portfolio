@@ -1,0 +1,101 @@
+<video
+  #videoEl
+  class="vp-video"
+  [src]="src()"
+  [attr.poster]="poster() ?? null"
+  playsinline
+  preload="metadata"
+  (click)="togglePlay()"
+  (play)="onPlayStateChange(true)"
+  (pause)="onPlayStateChange(false)"
+  (ended)="onPlayStateChange(false)"
+  (timeupdate)="onTimeUpdate()"
+  (loadedmetadata)="onLoadedMetadata()"
+  (progress)="onProgress()"
+  (waiting)="buffering.set(true)"
+  (playing)="buffering.set(false)"
+></video>
+
+@if (buffering() && playing()) {
+  <div class="vp-spinner" aria-hidden="true"></div>
+}
+
+@if (!playing()) {
+  <button
+    type="button"
+    class="vp-big-play"
+    [attr.aria-label]="playLabel()"
+    (click)="togglePlay()"
+  >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M10 8.2l6.2 3.8-6.2 3.8z" />
+    </svg>
+  </button>
+}
+
+<div class="vp-controls" [class.vp-controls-hidden]="controlsHidden()">
+  <div
+    #progressEl
+    class="vp-progress"
+    (pointerdown)="onProgressPointerDown($event)"
+    (pointermove)="onProgressPointerMove($event)"
+    (pointerup)="onProgressPointerUp($event)"
+  >
+    <span class="vp-progress-track"></span>
+    <span class="vp-progress-buffered" [style.width.%]="bufferedPercent()"></span>
+    <span class="vp-progress-fill" [style.width.%]="progressPercent()"></span>
+    <span class="vp-progress-thumb" [style.left.%]="progressPercent()"></span>
+  </div>
+
+  <div class="vp-controls-row">
+    <button type="button" class="vp-btn" [attr.aria-label]="playLabel()" (click)="togglePlay()">
+      @if (playing()) {
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <rect x="6" y="5" width="4" height="14" />
+          <rect x="14" y="5" width="4" height="14" />
+        </svg>
+      } @else {
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z" />
+        </svg>
+      }
+    </button>
+
+    <span class="vp-time">{{ formattedCurrent() }} / {{ formattedDuration() }}</span>
+
+    <span class="vp-spacer"></span>
+
+    <button type="button" class="vp-btn" [attr.aria-label]="muteLabel()" (click)="toggleMute()">
+      @if (muted()) {
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M4 9v6h4l5 4V5L8 9H4z" />
+          <path d="M17 8l5 8M22 8l-5 8" />
+        </svg>
+      } @else {
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M4 9v6h4l5 4V5L8 9H4z" />
+          <path d="M16.3 8.5a5 5 0 0 1 0 7" />
+          <path d="M19 6a8.5 8.5 0 0 1 0 12" />
+        </svg>
+      }
+    </button>
+
+    <button
+      type="button"
+      class="vp-btn"
+      [attr.aria-label]="fullscreenLabel()"
+      (click)="toggleFullscreen()"
+    >
+      @if (isFullscreen()) {
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5" />
+        </svg>
+      } @else {
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M4 9V4h5M15 4h5v5M4 15v5h5M15 20h5v-5" />
+        </svg>
+      }
+    </button>
+  </div>
+</div>

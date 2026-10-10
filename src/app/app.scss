@@ -1,0 +1,27 @@
+:host {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  background: #f9f9f9;
+}
+
+.footer-reveal {
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+.page-end-anchor {
+  display: block;
+  width: 100%;
+  height: 0;
+}
+
+@media (max-width: 768px) {
+  /* The footer is in flow on mobile, so nothing has to be revealed. */
+  .footer-reveal {
+    display: none;
+  }
+}

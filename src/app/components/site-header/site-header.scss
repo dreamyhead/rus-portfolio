@@ -1,0 +1,225 @@
+/* Fixed rather than sticky: a sticky header keeps a row of its own in the
+   flow, so at the top of the page the glass shows the app background through
+   it instead of the hero. Out of flow, the hero starts under it. */
+:host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(249, 249, 249, 0.78);
+  backdrop-filter: blur(28px) brightness(1.14) saturate(0.75);
+  -webkit-backdrop-filter: blur(28px) brightness(1.14) saturate(0.75);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* A backdrop-filter nested inside another filtered element is where some
+   browsers silently drop the blur — the open panel below has its own glass
+   effect, so the thin header strip's filter steps aside while it's open. */
+:host.menu-open {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.header-inner {
+  width: 100%;
+  max-width: 1400px;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.header-logo {
+  position: relative;
+  z-index: 1;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 0.08em;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.header-logo-dot {
+  color: #0a7758;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.header-link {
+  position: relative;
+  padding: 4px 0;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  color: black;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.header-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #0a7758;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.header-link:hover::after,
+.header-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.header-lang {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 999px;
+}
+
+.header-lang-option {
+  padding: 4px 12px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: #5a5a5a;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.header-lang-option:hover {
+  color: black;
+}
+
+.header-lang-active {
+  background-color: #0a7758;
+  color: #f9f9f9;
+}
+
+.header-lang-active:hover {
+  color: #f9f9f9;
+}
+
+.header-menu-toggle {
+  position: relative;
+  z-index: 1;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.header-menu-bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: black;
+  border-radius: 1px;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.header-menu-toggle-open .header-menu-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.header-menu-toggle-open .header-menu-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.header-menu-toggle-open .header-menu-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .header-inner {
+    padding: 0 20px;
+    gap: 12px;
+  }
+
+  .header-logo {
+    font-size: 20px;
+  }
+
+  .header-right {
+    gap: 10px;
+  }
+
+  .header-nav {
+    display: none;
+  }
+
+  .header-nav-open {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    /* backdrop-filter on :host makes it the containing block for fixed
+       descendants, so height/width come from viewport units here rather
+       than depending on :host's own (header-row-sized) box. */
+    width: 100vw;
+    height: 100svh;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 8px;
+    padding: calc(var(--header-height) + 24px) 20px 24px;
+    background-color: rgba(249, 249, 249, 0.78);
+    backdrop-filter: blur(40px) brightness(1.14) saturate(0.75);
+    -webkit-backdrop-filter: blur(40px) brightness(1.14) saturate(0.75);
+  }
+
+  .header-nav-open .header-link {
+    padding: 16px 0;
+    font-size: 20px;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .header-lang-option {
+    padding: 3px 8px;
+    font-size: 11px;
+  }
+
+  .header-menu-toggle {
+    display: flex;
+  }
+}

@@ -1,0 +1,15 @@
+<app-site-header />
+<app-hero-section />
+<app-about-section (galleryOpen)="openGallery($event)" />
+<app-animation-section id="animation" />
+<div class="footer-reveal" [style.height.px]="footerHeight()" aria-hidden="true"></div>
+<app-site-footer (heightChange)="footerHeight.set($event)" />
+<span id="contact" class="page-end-anchor" aria-hidden="true"></span>
+@let opened = openedProject();
+@if (opened) {
+  <app-project-gallery
+    [title]="opened.title"
+    [images]="opened.gallery ?? []"
+    (closed)="closeGallery()"
+  />
+}

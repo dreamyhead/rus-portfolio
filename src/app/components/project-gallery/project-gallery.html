@@ -1,0 +1,30 @@
+<div
+  class="gallery-backdrop"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-label]="title()"
+  (click)="onBackdropClick($event)"
+>
+  <div class="gallery-shell">
+    <header class="gallery-header">
+      <h2 class="gallery-title">{{ title() }}</h2>
+      <span #counter class="gallery-counter"></span>
+      <button
+        type="button"
+        class="gallery-close"
+        [attr.aria-label]="t().gallery.close"
+        (click)="close()"
+      >
+        &times;
+      </button>
+    </header>
+
+    <swiper-container #swiperEl class="gallery-swiper" init="false">
+      @for (image of images(); track image) {
+        <swiper-slide class="gallery-slide">
+          <img class="gallery-image" [src]="image" [alt]="title()" />
+        </swiper-slide>
+      }
+    </swiper-container>
+  </div>
+</div>
